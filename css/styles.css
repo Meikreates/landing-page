@@ -16,7 +16,7 @@ body {
     margin: 0;
     font-family: 'Merriweather', serif;
     color:#3e003e;
-    background-image: url('Images/Purple Happy Halloween Banner.png'); /* Specify the path to your image */
+    background-image: src('../Images/Purple Happy Halloween Banner.png'); /* Specify the path to your image */
     background-size: cover; /* Ensure the image covers the entire background */
     background-position: center; /* Center the image */
     background-attachment: fixed; /* Fixed background image */
