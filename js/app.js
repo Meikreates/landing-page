@@ -1,14 +1,14 @@
 
-// Start measuring time
+
 let startTime = performance.now();
 
-// Get all section elements
+// Get section elements
 const sections = document.querySelectorAll("section");
 
 // Get the list for navigation items
 const navList = document.getElementById("navbar__list");
 
-// Create navigation menu items dynamically
+// Create navigation menu items 
 function createNavItems() {
   sections.forEach((section) => {
     const sectionName = section.getAttribute("data-nav");
@@ -34,14 +34,14 @@ function createNavItems() {
   });
 }
 
-// Call the function to create the navigation menu
+// create the navigation menu
 createNavItems();
 
 // Get the header element
 const header = document.getElementsByClassName("page__header")[0];
 const main = document.getElementsByTagName("main")[0];
 
-// Detect scrolling and show/hide the navigation bar
+// show/hide the navigation bar
 let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
 window.addEventListener("scroll", function () {
@@ -56,7 +56,7 @@ window.addEventListener("scroll", function () {
   prevScrollPosition = currentScrollPosition;
 });
 
-// Create a scroll-to-top button
+// Create a scroll button
 const createScrollTopButton = function () {
   const scrollTopBtn = document.createElement("button");
   scrollTopBtn.innerHTML = "Back To Top";
@@ -85,10 +85,10 @@ const createScrollTopButton = function () {
   scrollTopBtn.addEventListener("click", scrollWindow);
 };
 
-// Call the scroll to top button function
+// scroll to top button
 createScrollTopButton();
 
-// Collapse sections when clicking on headers
+// Collapse sections 
 const sectionHeaders = document.getElementsByTagName("h2");
 for (let i = 0; i < sectionHeaders.length; i++) {
   const header = sectionHeaders[i];
@@ -103,7 +103,7 @@ for (let i = 0; i < sectionHeaders.length; i++) {
   });
 }
 
-// Highlight the active section in the viewport
+// Highlight the active section 
 window.onscroll = () => {
   sections.forEach((element) => {
     if (element.getBoundingClientRect().top >= -400 && element.getBoundingClientRect().top <= 150) {
@@ -114,7 +114,7 @@ window.onscroll = () => {
   });
 };
 
-// Smoothly scroll to a section when clicking a link
+//  scroll to a section when clicking a link
 const links = document.querySelectorAll(".menu__link");
 links.forEach((link) => {
   link.addEventListener("click", smoothScroll);
@@ -130,8 +130,8 @@ function smoothScroll(e) {
   });
 }
 
-// Stop measuring time
+
 let endTime = performance.now();
 
-// Log the time taken in milliseconds
+
 console.log(`${endTime - startTime} milliseconds`);
