@@ -1,64 +1,78 @@
-// Getting The Starting Time Of The Performance
-let startingTime = performance.now();
-// Getting All Section Elements Dynamically
-const sectionGroup = Array.from(document.querySelectorAll("section"));
-// Getting ul to nest our group of li's inside of it
-const itemsGroup = document.getElementById("navbar__list");
-/**
- * End Global Variables
- * Start Helper Functions
- *
- */
-// Creating Navbar Link Items Dynamically
-function creatingListItems() {
-  for (let section of sectionGroup) {
-    let sectionName = section.getAttribute("data-nav");
-    let sectionLink = section.getAttribute("id");
-    let itemLinks = document.createElement("li");
-    let itemSources = document.createElement("a");
-    itemSources.classList.add("menu__link");
-    itemSources.setAttribute("href", `#${sectionLink}`);
-    itemSources.textContent = `${sectionName}`;
-    itemLinks.appendChild(itemSources);
-    itemsGroup.appendChild(itemLinks);
-    itemSources.addEventListener("click", function () {
-      itemSources.classList.add("activeLinks");
-    });
-    itemSources.onblur = function () {
-      itemSources.classList.remove("activeLinks");
-    };
-  }
-}
-// Calling The Function To Create List Of Sections
-creatingListItems();
 
-/* 
-  The Following Lines Of Code Depicts The Visibilty Of The Navbar While Scrolling And/Or The Invisibility When Stop Scrolling 
-*/
-let topPosition;
-navbar = document.getElementsByClassName("page__header");
+// Start measuring time
+let startTime = performance.now();
+
+// Get all section elements
+const sections = document.querySelectorAll("section");
+
+// Get the list for navigation items
+const navList = document.getElementById("navbar__list");
+
+// Create navigation menu items dynamically
+function createNavItems() {
+  sections.forEach((section) => {
+    const sectionName = section.getAttribute("data-nav");
+    const sectionId = section.getAttribute("id");
+
+    const listItem = document.createElement("li");
+    const linkItem = document.createElement("a");
+
+    linkItem.className = "menu__link";
+    linkItem.href = `#${sectionId}`;
+    linkItem.textContent = sectionName;
+
+    listItem.append(linkItem);
+    navList.append(listItem);
+
+    linkItem.addEventListener("click", function () {
+      linkItem.classList.add("activeLinks");
+    });
+
+    linkItem.onblur = function () {
+      linkItem.classList.remove("activeLinks");
+    };
+  });
+}
+
+// Call the function to create the navigation menu
+createNavItems();
+
+// Get the header element
+const header = document.getElementsByClassName("page__header")[0];
+const main = document.getElementsByTagName("main")[0];
+
+// Detect scrolling and show/hide the navigation bar
+let prevScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
 window.addEventListener("scroll", function () {
-  let topScroll = window.pageYOffset || document.documentElement.topScroll;
-  if (topScroll > topPosition) {
-    navbar[0].style.top = "-150px";
+  const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  
+  if (currentScrollPosition > prevScrollPosition) {
+    header.style.top = "0"; // Keep the header visible
   } else {
-    navbar[0].style.top = "0";
+    header.style.top = "0"; // Keep the header visible
   }
-  topPosition = topScroll;
+
+  prevScrollPosition = currentScrollPosition;
 });
-// A Function To Scroll To Top When Clicking On The Button
-const scrollTop = function () {
-  const scrollBtn = document.createElement("button");
-  scrollBtn.innerHTML = "Back To Top";
-  scrollBtn.setAttribute("class", "scrolltotop");
-  let main = document.getElementsByTagName("main");
-  main[0].appendChild(scrollBtn);
-  const scrollBtnDisplay = function () {
-    window.scrollY > window.innerHeight
-      ? scrollBtn.classList.add("scrolltotopshow")
-      : scrollBtn.classList.remove("scrolltotopshow");
+
+// Create a scroll-to-top button
+const createScrollTopButton = function () {
+  const scrollTopBtn = document.createElement("button");
+  scrollTopBtn.innerHTML = "Back To Top";
+  scrollTopBtn.className = "scrolltotop";
+  main.append(scrollTopBtn);
+
+  const showScrollButton = function () {
+    if (window.scrollY > window.innerHeight) {
+      scrollTopBtn.classList.add("scrolltotopshow");
+    } else {
+      scrollTopBtn.classList.remove("scrolltotopshow");
+    }
   };
-  window.addEventListener("scroll", scrollBtnDisplay);
+
+  window.addEventListener("scroll", showScrollButton);
+
   const scrollWindow = function () {
     if (window.scrollY !== 0) {
       setTimeout(function () {
@@ -67,70 +81,57 @@ const scrollTop = function () {
       }, 10);
     }
   };
-  scrollBtn.addEventListener("click", scrollWindow);
+
+  scrollTopBtn.addEventListener("click", scrollWindow);
 };
-// Calling The Function
-scrollTop();
-// Collapsing Sections - Clicking On The Headers (H2) To Collapse And/Or Show The Collapsed Sections
-let secHeaders = document.getElementsByTagName("h2");
-let i;
-for (i = 0; i < secHeaders.length; i++) {
-  let secHeader = secHeaders[i];
-  secHeader.addEventListener("click", function () {
+
+// Call the scroll to top button function
+createScrollTopButton();
+
+// Collapse sections when clicking on headers
+const sectionHeaders = document.getElementsByTagName("h2");
+for (let i = 0; i < sectionHeaders.length; i++) {
+  const header = sectionHeaders[i];
+  header.addEventListener("click", function () {
     this.classList.toggle("active");
-    let collapse = this.nextElementSibling;
-    if (collapse.style.display === "block") {
-      collapse.style.display = "none";
+    const section = this.nextElementSibling;
+    if (section.style.display === "block") {
+      section.style.display = "none";
     } else {
-      collapse.style.display = "block";
+      section.style.display = "block";
     }
   });
 }
-/**
- * End Helper Functions
- * Begin Main Functions
- *
- */
-// Activating The Viewport Section
+
+// Highlight the active section in the viewport
 window.onscroll = () => {
-  document.querySelectorAll("section").forEach((element) => {
-    if (
-      element.getBoundingClientRect().top >= -400 &&
-      element.getBoundingClientRect().top <= 150
-    ) {
+  sections.forEach((element) => {
+    if (element.getBoundingClientRect().top >= -400 && element.getBoundingClientRect().top <= 150) {
       element.classList.add("your-active-class");
     } else {
       element.classList.remove("your-active-class");
     }
   });
 };
-// Getting Anchors In Our DOM And Add Event Listener On Them
+
+// Smoothly scroll to a section when clicking a link
 const links = document.querySelectorAll(".menu__link");
-links.forEach((ele) => {
-  ele.addEventListener("click", smoothScroll);
+links.forEach((link) => {
+  link.addEventListener("click", smoothScroll);
 });
-// This Is The Main Function To Make The Scrolling Smooth When Clicking On One Of The Anchors
+
 function smoothScroll(e) {
   e.preventDefault();
-  const anch = this.getAttribute("href");
-  const offsetTop = document.querySelector(anch).offsetTop;
-  scroll({
+  const anchor = this.getAttribute("href");
+  const offsetTop = document.querySelector(anchor).offsetTop;
+  window.scroll({
     top: offsetTop,
     behavior: "smooth",
   });
 }
-// Getting The Ending Time Of The Performance
-let endingTime = performance.now();
-// Testing The Performanc In The Console Window Which Depicts The Time Code Has Taken To Run In Milliseconds
-console.log(`${endingTime - startingTime} milliseconds`);
-// build the nav
-// Add class 'active' to section when near top of viewport
-// Scroll to anchor ID using scrollTO event
-/**
- * End Main Functions
- * Begin Events
- *
- */
-// Build menu
-// Scroll to section on link click
-// Set sections as active
+
+// Stop measuring time
+let endTime = performance.now();
+
+// Log the time taken in milliseconds
+console.log(`${endTime - startTime} milliseconds`);

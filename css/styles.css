@@ -100,18 +100,21 @@ section {
 
 /* Header Styles */
 .page__header {
-    background: rgb(255, 123, 0);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 5;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    -ms-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+    color: #f56206;
+    
+    background: rgb(255, 123, 0);
 }
+
+
+
+
+
+
 
 /* Footer Styles */
 .page__footer {
