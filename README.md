@@ -2,8 +2,14 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Welcome to my project! I created an Responsive Landing page using javascript,
+Dom, CSS and HTML. I decided to do an halloween theme because well it is halloween so why not. 
 
-To get started, open `js/app.js` and start building out the app's functionality
+I created an animation for the heading text, A customized background, navagation with anchors, a button to push you back to the top of the page, and highlighted sections.
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+you are welcome to fork create your own from mine. 
+to clone just click Fork.
+
+To see how this code works put 
+
+Thank you for viewing. 

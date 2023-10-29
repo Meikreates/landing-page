@@ -1,65 +1,52 @@
-/*
- *
- * CSS written based on SMACSS architecture.
- * To learn more, visit: http://smacss.com/
- * 
- * For simplicity, no reset or normalize is added. 
- * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
- *
-*/
-
-
-/* ---- Base Rules ---- */
 body {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, #3e003e 100%);
+    background: rgb(82, 0, 59);
+    background: linear-gradient(0deg, rgb(64, 0, 69) 0%, rgb(0, 0, 0) 100%);
+    background-image: url('../Images/Purple Happy Halloween Banner.png');
+    background-size: cover;
+    background-position: center;
     margin: 0;
-    font-family: 'Merriweather', serif;
-    color:#3e003e;
-    background-image: src('../Images/Purple Happy Halloween Banner.png'); /* Specify the path to your image */
-    background-size: cover; /* Ensure the image covers the entire background */
-    background-position: center; /* Center the image */
-    background-attachment: fixed; /* Fixed background image */
-    background-repeat: no-repeat; /* Prevent image from repeating */
+    font-family: 'Fira Sans', sans-serif;
+    color: rgb(64, 0, 69);
+    
 }
 
-/* Typeography General */
+
+/* Typeography General*/
 h1 {
-    font-family: 'Fira Sans', sans-serif;
     font-size: 3em;
     margin: 2em 1rem;
-    color: #fff;
     text-align: center;
-    text-transform: uppercase; /* Uppercase text */
-    text-shadow: 2px 2px 4px #333; /* Add a text shadow */
+    color: #f56206; /* Orange */
+    animation: zoomInOut 10s ease-in-out infinite;
 }
 
-
-/* Responsiveness*/
-
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
     h1 {
         font-size: 7em;
         margin: 2em 4rem 1em;
-        color: #f56206;
-        text-shadow: #eee;
-        text-align: center;
-        animation: zoomInOut 8s ease-in-out infinite;
-
     }
 }
 
 h2 {
-    border-bottom: 1px solid rgb(254, 254, 254);
-    font-family: 'Oxygen', Sans-Serif;
+    border-bottom: 1px solid #cc1; /* Yellow */
     font-size: 3em;
-    color: #f56206;
-    
+    color: #fff;
+    cursor: pointer;
 }
 
 p {
     line-height: 1.6em;
     color: #eee;
+}
+
+
+/* Active Class For Collapsing Sections */
+.active {
+    -webkit-transition: 0.5;
+    -moz-transition: 0.5;
+    -ms-transition: 0.5;
+    -o-transition: 0.5;
+    transition: 0.5;
 }
 
 /* ---- Layout Rules ---- */
@@ -70,6 +57,8 @@ main {
 .main-hero {
     min-height: 40vh;
     padding-top: 3em;
+    background: #f56206; /* Orange */
+    color:rgb(82, 0, 59);
 }
 
 section {
@@ -102,26 +91,36 @@ section {
 .navbar__menu .menu__link:hover {
     background: #333;
     color: #fff;
+    -webkit-transition: ease 0.3s all;
+    -moz-transition: ease 0.3s all;
+    -ms-transition: ease 0.3s all;
+    -o-transition: ease 0.3s all;
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: rgb(255, 123, 0);
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 5;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
 
 /* Footer Styles */
 .page__footer {
     background: #000;
     padding: 3em;
-    color: #fff;
+    color: #ffffff;
 }
 
-.page__footer p{
+.page__footer p {
     color: #fff;
 }
 
@@ -133,7 +132,42 @@ section {
     text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+/* Scroll To Top Button Style */
+
+.scrolltotop {
+    position: fixed;
+    bottom: 23px;
+    right: 23px;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.scrolltotopshow {
+    opacity: 1;
+}
+
+/* Activating The Current Nav Link When Clicked */
+
+.activeLinks {
+    background-color: #333;
+    color: white !important;
+}
+
+@media only screen and (min-width: 35em) {
     .landing__container {
         max-width: 50em;
         padding: 4em;
@@ -143,7 +177,7 @@ section {
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
     margin-left: auto;
-    text-align: right; 
+    text-align: right;
 }
 
 /* Background Circles */
@@ -163,8 +197,8 @@ section:nth-of-type(odd) .landing__container::before {
 
 section:nth-of-type(even) .landing__container::before {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(230, 5, 5);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     top: 3em;
     right: 3em;
@@ -178,8 +212,8 @@ section:nth-of-type(even) .landing__container::before {
 
 section:nth-of-type(3n) .landing__container::after {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     right: 0;
     bottom: 0;
@@ -193,8 +227,8 @@ section:nth-of-type(3n) .landing__container::after {
 
 section:nth-of-type(3n + 1) .landing__container::after {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     right: 20vw;
     bottom: -5em;
@@ -211,36 +245,33 @@ section:nth-of-type(3n + 1) .landing__container::after {
 /* Section Active Styles */
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.your-active-class {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    background: #f56206; /* Orange */
+    background: linear-gradient(0deg, rgba(8, 202, 69, 0.192) 0%, rgba(250, 135, 3, 0.32) 100%); /* Dark background */
 }
 
 section.your-active-class .landing__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
+    background: #33ff33; /* Green */
 }
 
 section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
+    background: #b401b4; /* Purple */
 }
 
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {
-	from {
-		transform: rotate(0deg)
-		           translate(-1em)
-		           rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg)
-		           translate(-1em) 
-		           rotate(-360deg);
-	}
+    from {
+        transform: rotate(0deg) translate(-1em) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translate(-1em) rotate(-360deg);
+    }
 }
-
-/*header text animation */
-
+/* Header Font Animation*/
 @keyframes zoomInOut {
     0%, 100% {
         transform: scale(1);
@@ -251,3 +282,7 @@ section.your-active-class .landing__container::after {
         opacity: 0.7;
     }
 }
+
+
+
+
